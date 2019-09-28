@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Create a TRIP!</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+          <h3>Hello {{user.name}}! Create a trip!</h3>
+      </div>
+      <div class="col">
+          <a href="/clean_session">Logout</a>
+      </div>
+    </div>
+    <br><br><br>
+    {% if messages %}
+<ul class="messages">    
+    {% for message in messages %}    
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+    {% endfor %}
+</ul>
+{% endif %}
+    <div class="row">
+      <form action="/work_on_trip" method="POST">
+        {% csrf_token %}
+        <ul class="list-unstyled">
+          <li>Destination <input type="text" name="destination"></li>
+          <br>
+          <li>Start Time <input type="date" name="start_date"></li>
+          <br>
+          <li>End Date <input type="date" name="end_date"></li>
+          <br>
+          <li>Plan: <textarea name="plan" cols="30" rows="5"></textarea></li>
+        </ul>
+        <a href="/dashboard"><button>Cancel</button></a>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+</body>
+</html>

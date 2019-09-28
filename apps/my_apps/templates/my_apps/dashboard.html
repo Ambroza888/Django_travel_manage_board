@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1>Hello {{the_user.name}}</h1>
+      </div>
+      <div class="row">
+          <a style = "margin-right: 30px;" href="/clean_session">Log Out</a>
+          <a href="/create_trip"><button>Create a new Trip!</button></a>
+      </div>
+    </div>
+    <br><br>
+    <div class="rol">
+      <p>Your Trips:</p>
+        <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Destinations</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Plan</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                {%for i in chosen_user_trips%}
+              <tr>
+                <td><a href="/trips/{{i.id}}">{{i.destination}}</a></td>
+                <td>{{i.start_date | date:"m/d/Y"}}</td>
+                <td>{{i.end_date | date:"m/d/Y"}}</td>
+                <td>{{i.plan}}</td>
+                <td><a href="/remove_trip/{{i.id}}">Remove</a> | <a href="/edit_trip/{{i.id}}">Edit</a></td>
+              </tr>
+              {%endfor%}
+            </tbody>
+          </table>
+          <br><br><br>
+          <div class="rol">
+              <p>Other Trips:</p>
+                <table class="table">
+                    <thead class="thead-light">
+                      <tr>
+                        <th scope="col">Destinations</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">End Date</th>
+                        <th scope="col">Plan</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {%for i in all_trips%}
+                      <tr>
+                        <td><a href="/trips/{{i.id}}">{{i.destination}}</a></td>
+                        <td>{{i.start_date | date:"y/d/Y"}}</td>
+                        <td>{{i.end_date | date:"m/d/Y"}}</td>
+                        <td>{{i.plan}}</td>
+                        <td>Joint(black_belt)</td>
+                      </tr>
+                      {%endfor%}
+                    </tbody>
+                  </table>
+
+    </div>
+  </div>
+</body>
+</html>
